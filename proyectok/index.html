@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Message Important </title>
+
+<style>
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    background: white;
+    margin: 0;
+    padding: 20px;
+}
+
+h1{
+    margin-top: 30px;
+}
+
+p{
+    max-width: 700px;
+    margin: auto;
+    font-size: 22px;
+    line-height: 1.5;
+}
+
+button{
+    padding: 15px 30px;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#siguiente{
+    background: #2196F3;
+    color: white;
+}
+
+#si{
+    background: #00b206;
+    color: white;
+    transition: transform 0.3s;
+}
+
+#no{
+    background: #d60000;
+    color: white;
+}
+
+#error{
+    background: #ff9900;
+    color: white;
+}
+
+#mensaje{
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.media{
+    width: 50%;
+    max-width: 400px;
+    border-radius: 15px;
+    margin-top: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,.2);
+}
+p{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: #d3bcde;
+    border-radius: 50px;
+    border: 1px solid black;
+    padding: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Pantalla inicial -->
+<div id="inicio">
+
+    <h1>Un mensaje very very importante para:</h1>
+
+    <h2>Krystell Valery Perez Nuñez </h2>
+
+    <hr>
+
+    <video class="media" autoplay muted loop playsinline>
+        <source src="proyectok/gatolam.mp4" type="video/mp4">
+    </video>
+
+    <br><br>
+
+    <button id="siguiente">Apretame ➜</button>
+
+</div>
+
+<!-- Pantalla pregunta -->
+<div id="pregunta" style="display:none;">
+
+    <h2>Para Krystell:</h2>
+
+    <p>
+        ''Si estás leyendo esto es porque llegamos al lugar donde nos propusimos.
+        Tenía planeado hacerte una pregunta que lleva buen tiempo en mi diminuta cabeza.
+        A pesar de los malos momentos que hemos tenido, yo creo que no hay nada que no
+        pueda solucionarse si ambos nos lo proponemos.''
+
+        <br><br>
+
+        ''Sé que quieres que hable con tus padres primero, pero tus padres pueden esperar;
+        yo ya no puedo dejar pasar un día más sin que seamos algo juntos. Espero este sea una de las muchas aventuras juntos.''
+    </p>
+    <hr>
+    <video class="media" autoplay muted loop playsinline>
+        <source src="proyectok/gatopar.mp4" type="video/mp4">
+    </video>
+
+    
+    <h3>Krystell, ¿Aceptarías que fuera tu novio? </h3>
+    
+
+    <button id="si">Shi </button>
+    <button id="no">Nop </button>
+    <button id="error">Errorr </button>
+
+    <div id="mensaje"></div>
+    <div id="mediaNo"></div>
+
+</div>
+
+<script>
+
+// Pantallas
+const pantallaInicio = document.getElementById("inicio");
+const pantallaPregunta = document.getElementById("pregunta");
+
+// Botones
+const botonSiguiente = document.getElementById("siguiente");
+const botonNo = document.getElementById("no");
+const botonSi = document.getElementById("si");
+const botonError = document.getElementById("error");
+
+// Mensajes
+const mensaje = document.getElementById("mensaje");
+const mediaNo = document.getElementById("mediaNo");
+
+let intentos = 0;
+
+const mensajes = [
+    "'a'",
+    "'errorrr'",
+    "'segura'",
+    "'kche ya'",
+    "'calajo'"
+];
+
+// Videos para cada intento de NO
+const videosNo = [
+    "proyectok/gatoboom.mp4",
+    "proyectok/error.mp4",
+    "proyectok/nailong.mp4",
+    "proyectok/kcheya.mp4",
+    "proyectok/calajo.mp4"
+    
+];
+
+// Mostrar pregunta
+botonSiguiente.addEventListener("click", function(){
+
+    pantallaInicio.style.display = "none";
+    pantallaPregunta.style.display = "block";
+
+});
+
+// Botón NO
+botonNo.addEventListener("click", function(){
+
+    if(intentos < mensajes.length){
+
+        mensaje.innerHTML = mensajes[intentos];
+
+        mediaNo.innerHTML = `
+            <video class="media" controls autoplay muted loop playsinline>
+                <source src="${videosNo[intentos]}" type="video/mp4">
+                Tu navegador no soporta videos.
+            </video>
+        `;
+
+        intentos++;
+
+    } else {
+
+        mediaNo.innerHTML = `
+            <video class="media" controls autoplay muted loop playsinline>
+                <source src="${videosNo[videosNo.length - 1]}" type="video/mp4">
+            </video>
+        `;
+    }
+
+});
+
+
+// Botón YES
+botonSi.addEventListener("click", function(){
+
+    document.body.innerHTML = `
+        <div style="margin-top:50px;">
+
+            <hr>
+
+            <video class="media" autoplay muted loop playsinline>
+                <source src="proyectok/gatobeso.mp4" type="video/mp4">
+            </video>
+
+        </div>
+    `;
+});
+
+// Botón ERROR
+botonError.addEventListener("click", function(){
+
+    document.body.innerHTML = `
+        <div style="margin-top:50px;">
+
+            <h1> ERRORRR </h1>
+
+            <video class="media" autoplay muted loop playsinline>
+                <source src="proyectok/error.mp4" type="video/mp4">
+            </video>
+
+            <h2>ando pero chucky</h2>
+
+        </div>
+    `;
+});
+
+</script>
+
+</body>
+</html>
